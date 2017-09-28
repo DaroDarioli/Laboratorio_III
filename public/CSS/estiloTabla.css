@@ -1,0 +1,36 @@
+.error{
+    border-color: red;
+}
+
+body{
+    background-color: grey;
+}
+
+table{
+    width: 70%;
+}
+
+#tablaUsuarios{ 
+    background-color: #A54C23;
+    text-align: center;
+    border-width: 5px;
+    border-color: black;
+   
+}
+
+
+#btnEnviar{
+    width: 120px;
+	height:25px;
+	border-radius: 5px;
+    background-color: #CCC90B;	
+}
+
+
+#ingreso{ 
+    background-color: #B9671A;
+    width: 70%;
+    border: 6px;
+    border-color: black;
+   
+}
