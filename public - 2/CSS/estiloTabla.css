@@ -1,0 +1,62 @@
+#modulo{
+
+    padding: 10px 10px;
+    width: 30%;
+    height: 300px;
+    margin: 20px 200px;
+    background-color: #A54C23;
+    text-align: center;
+    border-width: 10px;
+    border-color: black;
+    border-radius: 20%;
+
+}
+
+
+.ingreso{
+    padding: 10px 10px;  
+    text-align: left;
+}
+
+
+
+.error{
+    border-color: red;
+}
+
+.itsOk{
+    border-color:none;
+}
+
+body{
+    background-color: grey;
+}
+
+table{
+    width: 70%;
+}
+
+#tablaUsuarios{ 
+    background-color: #A54C23;
+    text-align: center;
+    border-width: 5px;
+    border-color: black;
+   
+}
+
+
+#btnEnviar{
+    width: 120px;
+	height:25px;
+	border-radius: 5px;
+    background-color: #CCC90B;	
+}
+
+
+#ingreso{ 
+    background-color: #B9671A;
+    width: 70%;
+    border: 6px;
+    border-color: black;
+   
+}
