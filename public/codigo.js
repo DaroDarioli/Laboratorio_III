@@ -1,133 +1,122 @@
-//alert("primer js");
-// --> javascript: 
-var a=1;
-//VERIFICAR CÓMO HACER UN SPINNER
-
-/*
-alert(a);
-a="Afuera del mundial";
-alert(a);
-a=true;
-alert(a);
-a=1;
-alert(a);*/
-a=function(){alert("soy una funcion");}
-
-var myArray = ["Abril",4,"marzo"];
-typeof(myArray[0]); 
 
 
-//arrow function, como funcion anonima sin la palabra "function"
-var a = ()=>(var1, var2)
-{
-    //acá va el código
-};
+addEventListener('load', () => {
 
-//===>la llamada sería: a(4,5); 
+    btnLeer = document.getElementById("btnLogin");
+    btnLeer.addEventListener('click', enviar);
 
+    btnMostrarNoticias = document.getElementById("btnNoticia");
+    btnMostrarNoticias.addEventListener('click', mandarNoticia);
 
-
-//Funciones Autoinvocadas
-
-(function (){
-    alert ("hago algo");
-}());
-
-
-// para conseguir un contador sobre las visitas a una página por ajemplo
-//guardando el valor de counter cuando se cierra la página. 
-
-var inc = (function (){
+    btnNoticia = document.getElementById('btnNuevaNoticia');
+    btnNoticia.addEventListener('click',nuevaNoticia);
     
-    var counter = 0;
 
-    return function(){
-        return counter++;
+    btnSalir = document.getElementById("btnSalir");
+    btnSalir.addEventListener('click', cerrarPopUp);   
+
+});
+
+
+xhr = new XMLHttpRequest();
+
+function enviar() {
+
+    var user = document.getElementById("usrStr").value;
+    var pass = document.getElementById("passStr").value;
+
+    if (user == "") {
+        document.getElementById("usrtStr").className = "error";
+        alert("Falto cargar el usuario!!");
     }
-}());
+    else if (pass == "") {
+        document.getElementById("passStr").className = "error";
+        alert("Faltó cargar la constraseña!!");
+    }
+    else {
 
+        var datos = 'usr=' + encodeURIComponent(user) + '&pass=' + encodeURIComponent(pass);
+        xhr.responseType = 'text';
+        xhr.onreadystatechange = traerNoticias;
+        xhr.open('POST', 'http://localhost:3000/loginUsuario', true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send(datos);
+    }
+}
 
+function traerNoticias() {
 
-function Suma(a,b,callback){
-    var resultado = parseInt(a)+parseInt(b);
-    if(typeof(callback) === "function"){
-        callback(resultado);
+    if (xhr.readyState == 4 && xhr.status == 200) {
+
+        respuesta = JSON.parse(xhr.responseText);
+        if (respuesta == false) {
+            alert("Usuario inválido!");
+        }
+        else {
+
+            req = new XMLHttpRequest();
+            req.responseType = 'text';
+            req.onreadystatechange = imprimirNoticias;
+            req.open('GET', 'http://localhost:3000/noticias', true);
+            req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            req.send();
+        }
+    }
+}
+
+function imprimirNoticias() {
+
+    tcontentido = document.getElementById("contenido");    
+    body = "";
+
+    if (req.readyState == 4 && req.status == 200) {
+        respuesta = JSON.parse(req.responseText);
+            respuesta.forEach(function (element) {
+                var noticia = '<br><h4>' + element.tema + '</h4><br><h3>' + element.titulo + '</h3><br><p>' + element.noticia + '<br><br>' + element.fecha + '</p><br><br>';
+                body += noticia;
+
+            }, this);
+
+        tcontentido.innerHTML =  body;
+        ventana.style.display = "block";
     }
 
 }
 
-/*
-window.onload = function(){
+function nuevaNoticia() {
 
-//var a = document.getElementById("id1").value;
-//var b = document.getElementById("id2").value;
-
-var btnsuma = document.getElementById("btnsumar");
-btnsuma.addEventListener('click',function(){
-alert("ahroa sì dentro de sumar")
-
-})
-}  */
-
-
-window.onload = function(){
-    
-    var btnsuma = document.getElementById("btnsumar");
-    btnsuma.addEventListener('click',function(){
-        var a1 = document.getElementById("id1").value;
-        var b1 = document.getElementById("id2").value;
-    
-        Suma(a1,b1,function(res){
-            alert("La suma es: "+res)
-        })
-
-    }
-    
-    )
-    }
-
- 
-//  myDyv.InnerHtml ='<p class="miClase">'+fecha+'</p>';   ---> importante
-
-
- 
-
-
-// funciones constructor
-
-var Auto = function(nafta){
-    
-    var _nafta = nafta;
-    //this.setNafta  --> sería una propiedad haciendo un set de un atributo
-    this.setNafta = function(value){
-        _nafta = value;
-    }
-
-    this.getNafta = function(){
-        return _nafta;
-    }
+    popup.style.display = "block";
 
 }
 
-var a1 = new  Auto(555555);
-alert(a1.getNafta());
+function mandarNoticia() {
+  
+    varTema = document.getElementById("tema").value;
+    varTitulo = document.getElementById("titulo").value;
+    varNoticia = document.getElementById("noticia").value;
+    varEmail = "darioesteban21@hotmail.com"
 
-///notacion json
+    xhr1 = new XMLHttpRequest();
+    xhr1.onreadystatechange = cerrarPopUp;
+    xhr1.open('POST', 'http://localhost:3000/nuevaNoticia', true);
+    xhr1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    var datos = 'tema=' + varTema + '&titulo=' + varTitulo + '&noticia=' + varNoticia + '&email=' + varEmail;
+    xhr1.send(datos);
 
-auto1 = {
-
-    nafta:100,
-    puertas: 5,
-    patente:"AAA111"
 }
 
-auto3 = {
+function cerrarPopUp() {
 
+    req = new XMLHttpRequest();
+    req.responseType = 'text';
+    req.onreadystatechange = imprimirNoticias;
+    req.open('GET', 'http://localhost:3000/noticias', true);
+    req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    req.send()
+    popup.style.display = "none";
 }
 
-auto3 = {
-    nafta:900
-}
+
 
 
 

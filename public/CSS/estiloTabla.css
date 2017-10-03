@@ -1,14 +1,64 @@
+#modulo{
+
+    padding: 10px 10px;
+    width: 30%;
+    height: 300px;
+    margin: 20px 200px;
+    background-color: #A54C23;
+    text-align: center;
+    border-width: 10px;
+    border-color: black;
+    border-radius: 20%;
+
+}
+
+#noticia{
+    width: 100px;
+    height: 100px;
+}
+
+
+#popup{
+    padding: 20px 50px;
+    border-radius:20%;
+    text-align:left;
+    position: fixed;
+    float: right;
+    width:250px;
+    height:400px;
+    background-color:rgba(59, 98, 29, 0.90);
+    top: 0px;
+    left: 0px;
+    display:none;
+    
+}
+
+#btnSalir{
+    background-color: #4949C6;
+    border-radius: 20%;
+ 
+}
+
+
+
+.ingreso{
+    padding: 10px 10px;  
+    text-align: left;
+}
+
+
 .error{
     border-color: red;
+}
+
+.itsOk{
+    border-color:none;
 }
 
 body{
     background-color: grey;
 }
 
-table{
-    width: 70%;
-}
 
 #tablaUsuarios{ 
     background-color: #A54C23;
@@ -26,11 +76,13 @@ table{
     background-color: #CCC90B;	
 }
 
+#ventana{
+    position: absolute;
+    width:80%;
+    
+    background-color:rgba(63, 57, 197, 0.80);
+    top: 0px;
+    left: 0px;
+    display:none;
 
-#ingreso{ 
-    background-color: #B9671A;
-    width: 70%;
-    border: 6px;
-    border-color: black;
-   
 }
