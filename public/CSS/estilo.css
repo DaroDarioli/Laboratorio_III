@@ -4,3 +4,13 @@
             border-color: black;
             border: 5px;
         }
+
+
+        .error{
+            border-color: red;
+        }
+        
+        
+        .itsOk{
+            border-color: blue;
+        }

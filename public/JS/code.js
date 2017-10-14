@@ -1,10 +1,24 @@
 $(document).ready(function () {
     CargarLista();
     $("#btnAgregar").click(ManejadorBtn);
-
 });
 
-function ManejadorBtn() {
+//https://www.youtube.com/watch?v=kvlBmon98xg   
+function ManejadorBtn(index) {
+
+    var botonActuar = $("#btnAgregar").val();
+
+    if (botonActuar == "Modificar") {
+        $("#btnAgregar").click(function () {
+            ModificarPersona(index);
+        });
+    }
+    else {
+        AgregarPersona();
+    }
+}
+
+function AgregarPersona() {
 
     var apellidoStr = $("#apellidoStr").val();
     var nombreStr = $("#nombreStr").val();
@@ -14,21 +28,16 @@ function ManejadorBtn() {
         url: 'http://localhost:3000/agregarpersona',
         data: info,
         method: 'post',
-        dataType: 'json',
-        success: CargarLista
-        //https://www.youtube.com/watch?v=kvlBmon98xg       
-
+        dataType: 'json',     
     })
-
+    CargarLista();
 }
 
 
-function ModificarJquery(index) {
-       
-    $("#btnAgregar").attr('value', 'Modificar');  
-    
+function ModificarPersona(index) {
+
     var apellidoStr = $("#apellidoStr").val();
-    var nombreStr = $("#nombreStr").val();
+    var nombreStr = $("#nombreStr").val();  
 
     varPersona = new Object();
     varPersona.nombre = nombreStr;
@@ -37,23 +46,28 @@ function ModificarJquery(index) {
     info = 'indice=' + encodeURIComponent(index) + '&persona=' + encodeURIComponent(JSON.stringify(varPersona));
 
     $.ajax({
-        
+
         url: 'http://localhost:3000/modificarpersona',
         data: info,
         method: 'post',
-        dataType: 'json', 
-  
+        dataType: 'json'        
     })
-    
+    $("#btnAgregar").attr('value', 'Agregar');
     CargarLista();
 
+}
+
+function ModificarJquery(index) {
+
+    $("#btnAgregar").attr('value', 'Modificar');
+    ManejadorBtn(index);
 }
 
 
 function CargarLista() {
 
     var personas = [];
-    cadena = "";
+    var body = "";
 
     $.ajax({
         url: 'http://localhost:3000/traerpersonas',
@@ -62,10 +76,13 @@ function CargarLista() {
         success: function (response) {
 
             personas = $(response);
-            for (i = 0; i < personas.length; i++)
-                cadena += "<tr><td>" + personas[i].nombre + "</td><td>" + personas[i].apellido + "</td><td><input type='button' onclick='BorrarJquery(" + i + ")' id='btnAgregar' value='Borrar'></td><td><input type='button' onclick='ModificarJquery(" + i + ")' id='btnAgregar' value='Modificar'></tr>";
+            for (i = 0; i < personas.length; i++) {
 
-            $("#contenido").html(cadena);
+                if (personas[i] == null) continue;
+                var cadena = "<tr><td>" + personas[i].nombre + "</td><td>" + personas[i].apellido + "</td><td><input type='button' onclick='BorrarJquery(" + i + ")' id='btnAgregar' value='Borrar'></td><td><input type='button' onclick='ModificarJquery(" + i + ")' id='btnAgregar' value='Modificar'></tr>";
+                body += cadena;
+            }
+            $("#contenido").html(body);
         }
     })
 }
