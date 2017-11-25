@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="jquery.js"></script>
+    <script src="index.js"></script>
+
+    <title>Cineclub</title>
+
+</head>
+
+<body>
+    <div id="form">
+        <label>Pelicula:</label>
+        <br>
+        <input type="text" id="peliculaStr">
+        <br>
+
+        <label>Pais:</label>
+        <br>
+        <input type="text" id="paisStr">
+        <br>
+
+        <label>Costo:</label>
+        <br>
+        <input type="text" id="costoStr">
+        <br>
+
+        <div>
+            <select id="mySelect"></select>
+        </div>
+        <br>
+        <br>
+
+        <div>
+            <input name="checkbox_name" id="genero_id" type="checkbox" checked onchange="array2Tabla(peliculas)">Genero</div>
+        <br>
+        <br>
+
+        <div>
+            <input name="checkbox_name" id="pais_id" type="checkbox" checked onchange="array2Tabla(peliculas)">Pais</div>
+        <br>
+        <br>
+        <div>
+            filtrar por genero:
+            <!-- <select id="selectMostrar" onchange="filtrarTabla(peliculas)"></select>-->
+            <select id="selectMostrar" onchange="array2Tabla(peliculas)"></select>
+        </div><br>
+        <br>
+        <input type="button" id="btnAgregar" value="Agregar">
+        <input type="button" id="btnSumar" value="Sumar"> Suma:
+        <input type="text" id="resultado" name="suma">
+        <br>
+
+    </div>
+    <br>
+    <br>
+    <div>
+        <table id="tablaPeliculas">
+
+        </table>
+    </div>
+
+
+</body>
+
+</html>

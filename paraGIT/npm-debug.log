@@ -1,0 +1,65 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   '@types/jquery' ]
+2 info using npm@3.10.10
+3 info using node@v6.11.3
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readLocalPackageData
+7 silly fetchPackageMetaData @types/jquery@^3.2.16
+8 silly fetchNamedPackageData @types/jquery
+9 silly mapToRegistry name @types/jquery
+10 silly mapToRegistry scope (from package name) @types
+11 verbose mapToRegistry no registry URL found in name for scope @types
+12 silly mapToRegistry using default registry
+13 silly mapToRegistry registry https://registry.npmjs.org/
+14 silly mapToRegistry data Result {
+14 silly mapToRegistry   raw: '@types/jquery',
+14 silly mapToRegistry   scope: '@types',
+14 silly mapToRegistry   escapedName: '@types%2fjquery',
+14 silly mapToRegistry   name: '@types/jquery',
+14 silly mapToRegistry   rawSpec: '',
+14 silly mapToRegistry   spec: 'latest',
+14 silly mapToRegistry   type: 'tag' }
+15 silly mapToRegistry uri https://registry.npmjs.org/@types%2fjquery
+16 verbose request uri https://registry.npmjs.org/@types%2fjquery
+17 verbose request no auth needed
+18 info attempt registry request try #1 at 19:06:44
+19 verbose request id e49b80ae50dff852
+20 http request GET https://registry.npmjs.org/@types%2fjquery
+21 info retry will retry, error on last attempt: Error: write EPROTO 101057795:error:14077419:SSL routines:SSL23_GET_SERVER_HELLO:tlsv1 alert access denied:openssl\ssl\s23_clnt.c:772:
+22 info attempt registry request try #2 at 19:06:55
+23 http request GET https://registry.npmjs.org/@types%2fjquery
+24 info retry will retry, error on last attempt: Error: write EPROTO 101057795:error:14077419:SSL routines:SSL23_GET_SERVER_HELLO:tlsv1 alert access denied:openssl\ssl\s23_clnt.c:772:
+25 info attempt registry request try #3 at 19:07:55
+26 http request GET https://registry.npmjs.org/@types%2fjquery
+27 silly fetchPackageMetaData Error: write EPROTO 101057795:error:14077419:SSL routines:SSL23_GET_SERVER_HELLO:tlsv1 alert access denied:openssl\ssl\s23_clnt.c:772:
+27 silly fetchPackageMetaData
+27 silly fetchPackageMetaData     at exports._errnoException (util.js:1020:11)
+27 silly fetchPackageMetaData     at WriteWrap.afterWrite (net.js:800:14)
+27 silly fetchPackageMetaData  error for @types/jquery@^3.2.16 { Error: write EPROTO 101057795:error:14077419:SSL routines:SSL23_GET_SERVER_HELLO:tlsv1 alert access denied:openssl\ssl\s23_clnt.c:772:
+27 silly fetchPackageMetaData
+27 silly fetchPackageMetaData     at exports._errnoException (util.js:1020:11)
+27 silly fetchPackageMetaData     at WriteWrap.afterWrite (net.js:800:14) code: 'EPROTO', errno: 'EPROTO', syscall: 'write' }
+28 silly rollbackFailedOptional Starting
+29 silly rollbackFailedOptional Finishing
+30 silly runTopLevelLifecycles Finishing
+31 silly install printInstalled
+32 verbose stack Error: write EPROTO 101057795:error:14077419:SSL routines:SSL23_GET_SERVER_HELLO:tlsv1 alert access denied:openssl\ssl\s23_clnt.c:772:
+32 verbose stack
+32 verbose stack     at exports._errnoException (util.js:1020:11)
+32 verbose stack     at WriteWrap.afterWrite (net.js:800:14)
+33 verbose cwd E:\Laboratorio_III\Type_2
+34 error Windows_NT 10.0.14393
+35 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "@types/jquery"
+36 error node v6.11.3
+37 error npm  v3.10.10
+38 error code EPROTO
+39 error errno EPROTO
+40 error syscall write
+41 error write EPROTO 101057795:error:14077419:SSL routines:SSL23_GET_SERVER_HELLO:tlsv1 alert access denied:openssl\ssl\s23_clnt.c:772:
+42 error If you need help, you may report this error at:
+42 error     <https://github.com/npm/npm/issues>
+43 verbose exit [ 1, true ]
