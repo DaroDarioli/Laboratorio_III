@@ -1,101 +1,160 @@
-var express =require("express");
-var cors = require("cors");
-var corsOptions = {origin:"*",optionSucessStatus:200};
-var app = express();
-var bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({extended:false}));
-app.use(bodyParser.json());
-
-app.use(cors(corsOptions));
-app.use(express.static(__dirname + '/public'));
-
-var noticias = [{"tema":"CSS","titulo":"Nuevos CSS3","noticia":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut tortor et ex viverra ullamcorper. Vivamus at lacinia quam. Aliquam a laoreet dui. In hac habitasse platea dictumst. Aliquam nec molestie magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Morbi tincidunt efficitur justo, at pulvinar arcu lobortis sit amet. Integer vel enim vitae urna dictum efficitur. Quisque nunc arcu, gravida sit amet elementum eu, tempor at libero. Vivamus in vulputate purus. Nunc quis dolor sed dui commodo malesuada ac in diam. Vestibulum sit amet eros accumsan, suscipit ex eget, rhoncus lorem.","fecha":"12/05/2018 17:26"},{"tema":"HTML","titulo":"Nuevos HTML5","noticia":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut tortor et ex viverra ullamcorper. Vivamus at lacinia quam. Aliquam a laoreet dui. In hac habitasse platea dictumst. Aliquam nec molestie magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Morbi tincidunt efficitur justo, at pulvinar arcu lobortis sit amet. Integer vel enim vitae urna dictum efficitur. Quisque nunc arcu, gravida sit amet elementum eu, tempor at libero. Vivamus in vulputate purus. Nunc quis dolor sed dui commodo malesuada ac in diam. Vestibulum sit amet eros accumsan, suscipit ex eget, rhoncus lorem.","fecha":"12/05/2018 17:30:02"}];
-app.get("/login",function(req,res){
-    
-    res.send("ok");
-});
-
-app.get("/loginUsuario",function(req,res){
-    console.log(req.query);
-    if(req.query.usr!=undefined && req.query.pass!=undefined){
-        if(req.query.usr==="usuario"&&req.query.pass==="1234")
-            res.send("true");    
-        else
-            res.send("false");
-        return;
+function unique(ar) {
+    var arr = [];
+    for (var i = 0; i < ar.length; i++) {
+        if (!arr.includes(ar[i])) {
+            arr.push(ar[i]);
+        }
     }
-    res.send("Debe ingresar Usuario y Contraseña");
-    
+    return arr;
+}
+////////////////////////////
+$(document).ready(function () {
+    peliculas = new Array();
+    CargarDeLocalStorage();
+    CargarValoresSelect();
+    select();
+    $("#btnAgregar").click(AgregarPelicula);
+    $("#btnSumar").click(SumarCostos);
 });
-app.get("/noticias",function(req,res){
- 
- res.send(noticias);    
-
-        return;
+var peliculas;
+function SumarCostos() {
+    var Total = peliculas.reduce(function (anterior, actual) {
+        return anterior + actual.Costo;
+    }, 0);
+    $("#resultado").val(Total);
+}
+function array2Tabla(arr) {
+    //esta funcion asume que es una array de todo sobjetos iguales.
+    if (!(arr.length > 0))
+        return -1;
+    var str = "<tr>";
+    $.each(arr[0], function (key2, value2) {
+        str += "<th class='" + key2 + "'>" + key2 + "</th>";
+    });
+    str += "</tr>";
+    //  console.log(str);
+    $.each(arr, function (key, value) {
+        str += "<tr>";
+        $.each(arr[key], function (key2, value2) {
+            str += "<th class='" + key2 + "'>" + value2 + "</th>";
+        });
+        str += "</tr>";
+    });
+    $("#tablaTitulares").html(str);
+    var gen = document.getElementById("genero_id").checked;
+    var pais = document.getElementById("pais_id").checked;
+    if (gen == false) {
+        $(".Genero").hide();
+    }
+    else {
+        $(".Genero").show();
+    }
+    if (pais == false) {
+        $(".Pais").hide();
+    }
+    else {
+        $(".Pais").show();
+    }
+}
+function filtrarTabla() {
+    var value = $("#selectMostrar").val();
+    for (var i = 0; i < peliculas.length; i++) {
+        if (peliculas[i].Genero != value) {
+        }
+    }
+}
+function AgregarPelicula() {
+    var tituloStr = String($("#peliculaStr").val());
+    var paisStr = String($("#paisStr").val());
+    var costoNmbr = Number($("#costoStr").val());
+    var generoStr = String($("#mySelect").val());
+    var peli = new Pelicula(tituloStr, generoStr, paisStr, costoNmbr);
+    peliculas.push(peli);
+    GuardarEnLocalStorage();
+}
+function select() {
+    var arr2 = peliculas.map(function (item) {
+        return item.Genero;
+    });
+    var str = "";
+    for (var i = 0; i < unique(arr2).length; i++) {
+        str += "<option>" + unique(arr2)[i] + "</option>";
+    }
+    $("#selectMostrar").html(str);
+    console.log(str);
+}
+function HarcodearContenido() {
+    var peli1 = new Pelicula("Trainspotting", "Drama", "Escocia", 4);
+    var peli2 = new Pelicula("9 Reinas", "Drama", "Argentina", 5);
+    peliculas.push(peli1, peli2);
+}
+function CargarDeLocalStorage() {
+    peliculas = JSON.parse(localStorage.getItem("peliculasAlmacenadas"));
+    array2Tabla(peliculas);
+}
+function clonarArray(arr) {
+    var nuevoArr = [];
+    for (var i = 0; i < arr.length; i++) {
+        nuevoArr.push(JSON.parse(JSON.stringify(arr[i])));
+    }
+    return nuevoArr;
+}
+function toggleGenero() {
+    var gen = document.getElementById("genero_id").checked;
+    var pais = document.getElementById("pais_id").checked;
+    var arr = clonarArray(peliculas);
+    /*   if(gen == false)
+       {
+          arr2= arr.map(function(item) {
+               delete item.Genero;
+               return item;
+           });
+       }else{
+           arr2=arr;
+       }
    
    
-    
-});
-
-app.post("/loginUsuario",function(req,res){
-    setTimeout(function(){
-        console.log(req.body)
-        if(req.body.usr!=undefined && req.body.pass!=undefined){
-            if(req.body.usr==="usuario"&&req.body.pass==="1234")
-                res.send("true");    
-            else
-                res.send("false");
-            return;
-        }
-        res.send("Debe ingresar Usuario y Contraseña");
-    },2000);
-    
-});
-
-app.post("/login",function(req,res){
-    setTimeout(function(){
-        console.log("Llego al servidor "+JSON.stringify(req.body));
-        
-       
-        if(req.body.email!=undefined && req.body.password!=undefined){
-            if(req.body.email==="usuario"&&req.body.password==="1234"){
-                console.log("Sale del servidor "+"{'type': 'User'}")
-                res.send({'type': 'User'});    
-            }else if(req.body.email==="admin"&&req.body.password==="1234"){
-                console.log("Sale del servidor "+"{'type': 'Admin'}")
-                res.send({'type': 'Admin'});    
-            }else{
-                console.log("Sale del servidor "+"{'type': 'error'}")
-                res.send({'type': 'error'});
-            }
-            return;
-        }
-        console.log("Sale del servidor "+"{'type': 'error'}")
-        res.send({'type': 'error'});
-    },2000);
-    
-});
-
-app.post("/nuevaNoticia",function(req,res){
-    setTimeout(function(){
-        
-       console.log(req.body);
-        if((req.body.email!= undefined&&req.body.email!= "") &&(req.body.tema!= undefined&&req.body.tema!= "") 
-			&&  (req.body.titulo!= undefined&&req.body.titulo!= "") && (req.body.noticia!= undefined&&req.body.noticia!= "")){
-	
-        var date ="12/12/12 12:35";//=new Date();
-			
-			var data = {"tema":req.body.tema,"titulo":req.body.titulo,"noticia":req.body.noticia,"fecha":date};
-				noticias.push(data);
-                res.send(data);    
-     
-            return;
-        }
-        res.send({'type': 'error'});
-    },2000);
-    
-});
-
-app.listen(3000,function(){
-    console.log("Api en el puerto 3000");
-});
+       if(pais == false)
+       {
+            arr2.map(function(item) {
+                   delete item.Pais;
+                   return item;
+               });
+       }
+   
+       array2Tabla(arr2); //muestro
+       */
+    console.log(gen, pais);
+    for (var i = 0; i < arr.length; i++) {
+        if (!gen)
+            delete arr[i].Genero; //saco genero  
+        if (!pais)
+            delete arr[i].Pais;
+    }
+    array2Tabla(arr);
+}
+function GuardarEnLocalStorage() {
+    localStorage.setItem("peliculasAlmacenadas", JSON.stringify(peliculas));
+    array2Tabla(peliculas);
+}
+var Genero;
+(function (Genero) {
+    Genero[Genero["Drama"] = 0] = "Drama";
+    Genero[Genero["Acci\u00F3n"] = 1] = "Acci\u00F3n";
+    Genero[Genero["Documental sobre Mar\u00EDa"] = 2] = "Documental sobre Mar\u00EDa";
+})(Genero || (Genero = {}));
+function CargarValoresSelect() {
+    $("#mySelect").append(new Option("Drama", "1"));
+    $("#mySelect").append(new Option("Accion", "2"));
+    $("#mySelect").append(new Option("Documental", "2"));
+}
+//______________Clase Pelicula
+var Pelicula = /** @class */ (function () {
+    function Pelicula(titulo, genero, pais, costo) {
+        this.Titulo = titulo;
+        this.Genero = genero;
+        this.Pais = pais;
+        this.Costo = costo;
+    }
+    return Pelicula;
+}());

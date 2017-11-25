@@ -1,16 +1,17 @@
 {
-  "name": "api_rest",
+  "name": "package.json",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.17.2",
-    "cors": "^2.8.4",
-    "express": "^4.15.4"
-  }
+    "@types/jquery": "^3.2.16",
+    "jquery": "^3.2.1"
+  },
+  "devDependencies": {},
+  "description": ""
 }
