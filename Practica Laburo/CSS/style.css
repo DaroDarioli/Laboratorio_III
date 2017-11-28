@@ -1,0 +1,32 @@
+#fondo{
+    background-color: grey;
+}
+
+#tablaPeliculas{
+    background-color: #0DA82F;
+    width: 70%;
+}
+
+
+#tablaPeliculas tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#tablaPeliculas tr:nth-child(even):hover{
+  
+    background-color: #360DA8;
+    color: #f2f2f2;
+}
+
+.borrar{
+    color: grey;
+}
+
+
+.error{
+    border-color: red;
+}
+
+.itsOk{
+    border-color: none;
+}
