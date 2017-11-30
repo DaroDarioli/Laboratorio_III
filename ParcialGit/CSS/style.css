@@ -1,0 +1,49 @@
+#fondo{
+    background-color: grey;
+    padding-left: 30px;
+    float: left;
+}
+
+
+.table-responsive{
+    background-color: #0DA82F;
+    padding: 20%;
+    left: 30px;
+    border: 2px solid black;
+    text-align: center;
+}
+
+
+#tablaEmpleados th{
+    background-color: rgb(26, 96, 189);
+    padding: 10px;
+    border: 1px solid black;
+    
+}
+
+#tablaEmpleados th td{
+    padding: 10px;
+    border: 1px solid black;
+      
+}
+
+#tablaEmpleados td{
+    padding: 10px;
+    border: 1px solid black;
+      
+}
+
+#tablaEmpleados tr:nth-child(even) {background-color: #f2f2f2;}
+
+.modulo{
+    display:none;
+    width: 100%;
+    height: 100%;
+    background-color: lightblue;
+}
+
+.Imagen img{
+    height:50px;
+}
+
+

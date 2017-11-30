@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="jquery.js"></script>
+    <script src="index.js"></script>
+
+    <title>Nomina</title>
+
+</head>
+
+<body id="fondo" class="container-fluid">
+    <div id="form" class="col-sm-12 col-lg-8 col-md-8">
+        <h3>Empleados</h3>
+        <label>Nombre:</label>
+        <br>
+        <input type="text" id="nombreStr">
+        <br>
+        <label>Apellido:</label>
+        <br>
+        <input type="text" id="apellidoStr">
+        <br>
+        <label>Edad:</label>
+        <br>
+        <input type="text" id="edadStr">
+        <br>
+        <div>
+            <select id="mySelect"></select>
+        </div>
+        <br>
+        <br>
+        <input id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();" />
+        <br>
+        <br>
+
+        <div>
+            <input name="checkbox_name" id="genero_id" type="checkbox" checked onchange="ConstruirTabla(empleados)">Genero</div>
+        <br>
+        <br>
+
+        <input type="button" id="btnAgregar" value="Agregar" class="btn btn-success btn-md">
+        <br>
+        <div>
+            filtrar por genero:
+
+            <select id="selectMostrar" onchange="ConstruirTabla(empleados)">
+                <option>Todos</option>
+            </select>
+        </div>
+        <br>
+        <br>
+
+        <!--  Modificar-->
+
+        <div class="modulo" >
+
+            <h4>Modificar Usuario</h4>
+
+            <label>Nombre:</label>
+            <br>
+            <input type="text" id="nombre">
+            <br>
+
+            <label>Apellido:</label>
+            <br>
+            <input type="text" id="apellido">
+            <br>
+
+            <label>Edad:</label>
+            <br>
+            <input type="text" id="edad">
+            <br>
+
+            <label>Sexo:</label>
+            <br>
+            <input type="text" id="sexo">
+            <br>
+
+            <br>
+            <input id="inputFileToModify" type="file" onchange="encodeImage();" />
+            <br>
+            <button type="button" class="btnForm" id="btnModificar">Modificar</button>
+
+        </div>
+
+        <!--  Fin Modificar-->
+
+
+        <input type="button" id="btnSumar" value="Promedio Edades" class="btn btn-primary btn-sm"> 
+        Promedio Edades:
+        <input type="text" id="resultado" name="suma">
+        <br> <br> <br>
+
+    </div>
+    <br>
+    <br>
+    <div>
+        <table id="tablaEmpleados" class="table-responsive">
+
+        </table>
+    </div>
+
+
+</body>
+
+</html>
