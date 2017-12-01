@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="CSS/style.css">
+    <script src="jquery.js"></script>
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Nomina</title>
+</head>
+
+<body class="container-fluid" id="fondo">
+
+    <!--Nav bar-->
+    <div class="container">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#miNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Laboratorio III</a>
+                </div>
+                <div class="collapse navbar-collapse" id="miNavbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <!-- navbar-right la ubica a la derecha -->
+                        <li>
+                            <a href="#">Home</a>
+                        </li>
+                        <li>
+                            <a href="#listado">Borrar</a>
+                        </li>
+                        <li>
+                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Modificar</button>
+                        </li>
+                        <li>
+                            <a href="#listado">Listado</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+
+    </div>
+    <!--Fin Nav bar-->
+
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+
+                    <h4 class="Ingreso">Modificar Usuario</h4>
+                    
+                    <label class="Ingreso">Id:</label>
+                    <input class="Ingreso" type="number" id="idm">
+                    <br>
+                    <label class="Ingreso">Nombre:</label>
+                    <input class="Ingreso" type="text" id="nombrem">
+                    <br>
+                    <label class="Ingreso">Apellido:</label>
+                    <input class="Ingreso" type="text" id="apellidom">
+                    <br>
+                    <label class="Ingreso">Edad:</label>
+                    <input class="Ingreso" type="number" id="edadm">
+                    <br>
+                    <label class="Ingreso">Genero:</label>
+                    <select class="Ingreso" id="SelectModificarM"></select>
+                    <br>
+                    <input class="Ingreso" id="inputFileToModify" type="file" onchange="encodeImage();" />
+                    <br>
+                    <button class="btn btn-success btn-md" type="button" id="modificarModulo">Modificar</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    </div>
+
+    <!-- Modal-->
+
+    <div id="form" class="col-sm-12 col-lg-8 col-md-8">
+        <h3 class="Ingreso">Empleados</h3>
+        <label class="Ingreso">Nombre:</label>
+        <input class="Ingreso" type="text" id="nombreStr">
+        <br>
+        <label class="Ingreso">Apellido:</label>
+        <input class="Ingreso" type="text" id="apellidoStr">
+        <br>
+        <label class="Ingreso">Edad:</label>
+        <input class="Ingreso" type="number" id="edadStr">
+        <br>
+        <label class="Ingreso">Genero:</label>
+        <select class="Ingreso" id="mySelect"></select>
+        <br>
+        <input class="Ingreso" id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();" />
+        <br>
+        <input type="button" id="btnAgregar" value="Agregar" class="btn btn-success btn-md">
+
+    </div>
+    <br>
+    <br>
+
+    <div class="row">
+        <div id="fill" class="col-lg-6 col-md-8 col-lg-8">
+            <div class="col-lg-2 col-md-1 col-lg-1"> Genero:</div>
+            <div class="col-lg-2 col-md-1 col-lg-1">
+                <input name="checkbox_name" id="genero_id" type="checkbox" checked onchange="ConstruirTabla(empleados)">
+            </div>
+            <div class="col-lg-2 col-md-1 col-lg-1"> Edad:</div>
+            <div class="col-lg-2 col-md-1 col-lg-1">
+                <input name="checkbox_edad" id="edad_id" type="checkbox" checked onchange="ConstruirTabla(empleados)">
+            </div>
+            <div class="col-lg-2 col-md-1 col-lg-1"> Apellido:</div>
+            <div class="col-lg-2 col-md-1 col-lg-1">
+                <input name="checkbox_apellido" id="apellido_id" type="checkbox" checked onchange="ConstruirTabla(empleados)">
+            </div>
+        </div>
+    </div>
+    </div>
+    <br>
+
+    <div class="Ingreso">Filtrar por genero:
+        <select class="Ingreso" id="selectMostrar" onchange="ConstruirTabla(empleados)">
+            <option>Todos</option>
+        </select>
+    </div>
+    <input type="button" id="btnSumar" value="Promedio Edades" class="btn btn-primary btn-sm"> Promedio Edades:
+    <input type="text" id="resultado" name="suma">
+
+
+    </div>
+    <div>
+        <table class="table col-sm-12 col-lg-12 col-md-12" id="tablaEmpleados">
+
+        </table>
+    </div>
+
+    <!--  Modificar-->
+    <div class="modulo">
+        <br>
+        <br>
+        <h4 class="Ingreso">Modificar Usuario</h4>
+        <label class="Ingreso">Nombre:</label>
+        <input class="Ingreso" type="text" id="nombre">
+        <br>
+        <label class="Ingreso">Apellido:</label>
+        <input class="Ingreso" type="text" id="apellido">
+        <br>
+        <label class="Ingreso">Edad:</label>
+        <input class="Ingreso" type="text" id="edad">
+        <br>
+        <label class="Ingreso">Genero:</label>
+        <select class="Ingreso" id="SelectModificar"></select>
+        <br>
+        <input class="Ingreso" id="inputFileToModify" type="file" onchange="encodeImage();" />
+        <br>
+        <button class="btn btn-success btn-md" type="button" id="btnModificar">Modificar</button>
+    </div>
+    <!--  Fin Modificar-->
+
+</body>
+
+</html>

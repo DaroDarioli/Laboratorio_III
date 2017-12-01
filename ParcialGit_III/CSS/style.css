@@ -1,0 +1,70 @@
+#fondo{
+    background-color: grey;
+    padding: 5%;
+}
+
+.Ingreso{
+   margin: 1%;   
+}
+
+.modi{
+ margin:10px;
+
+}
+
+#tablaEmpleados{
+    background-color: #0DA82F; 
+    border: 2px solid black;
+    text-align: center;
+    margin-top: 3%;
+}
+
+
+#tablaEmpleados th{
+    background-color: rgb(26, 96, 189);
+    padding: 10px;
+    text-align: center;
+    border: 1px solid black;    
+}
+
+
+#tablaEmpleados td{
+
+    border: 1px solid black;      
+}
+
+#tablaEmpleados tr:nth-child(even) {
+
+    background-color: #f2f2f2;
+}
+
+#tablaEmpleados tr:nth-child(even):hover {
+    background-color: rgb(26, 96, 189);
+
+}
+
+.modulo{
+    color: grey;
+    display:none;
+    width: 50%;
+    height: 70%;
+    position: absolute;
+    background-color: rgba(23, 66, 127, 1);
+    border-radius: 3%;
+    border-width: 5px;
+    border-color: grey;
+    padding-left: 5%;
+}
+
+.Imagen img{    
+    height:50px;
+}
+
+#btnAgregar{
+    margin: 1%;   
+}
+
+
+.form{
+    margin: 1%;
+}
